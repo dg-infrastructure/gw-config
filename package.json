@@ -1,0 +1,62 @@
+{
+  "name": "gw-javascript-template",
+  "version": "0.0.1",
+  "description": "a template for creating a javascript project ",
+  "main": "index.js",
+  "repository": "https://github.com/gruntwork-io/gw-javascript-template",
+  "author": "Gruntwork",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "glob": "^7.1.2",
+    "nconf": "^0.8.4",
+    "string-template": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.1.2",
+    "dotenv": "^4.0.0",
+    "eslint": "^4.7.2",
+    "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "husky": "^0.14.3",
+    "istanbul": "^0.4.5",
+    "istanbul-reports": "^1.1.2",
+    "mocha": "^3.5.3",
+    "mocha-circleci-reporter": "^0.0.2",
+    "nyc": "^11.2.1",
+    "prettier": "^1.7.0"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "include": [
+      "src/**"
+    ],
+    "exclude": [
+      "**/*.d.ts",
+      "**/*.spec.ts",
+      "**/*.test.ts"
+    ],
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "all": true
+  },
+  "scripts": {
+    "build": "yarn lint",
+    "cleanup": "rm -rf .nyc_output/ coverage/ *.log",
+    "lint": "yarn prettier && ./node_modules/eslint/bin/eslint.js --ext .jsx --ext .js src/",
+    "precommit": "yarn lint && yarn test",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write 'src/**/*.{ts,js}'",
+    "start": "node src/index.ts",
+    "test": "NODE_ENV=test GW_CONFIG_DIR='test' ENVOVERRIDE='myValue' nyc mocha 'src'",
+    "tslint": "tslint -c tslint.json -t 'stylish' 'src/**/*.ts'",
+    "watch": "tsc -w"
+  }
+}

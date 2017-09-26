@@ -1,0 +1,7 @@
+{
+  "gruntworkConfig": {
+    "defaultOnly": "DefaultOnlyvalue",
+    "envOverride": "DefaultEnvOverride",
+    "testEnvOverride": "DefaultTestEnvOverride"
+  }
+}
