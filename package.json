@@ -8,6 +8,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "aws-sdk": "^2.122.0",
     "glob": "^7.1.2",
     "nconf": "^0.8.4",
     "string-template": "^1.0.0"
@@ -51,12 +52,10 @@
   "scripts": {
     "build": "yarn lint",
     "cleanup": "rm -rf .nyc_output/ coverage/ *.log",
-    "lint": "yarn prettier && ./node_modules/eslint/bin/eslint.js --ext .jsx --ext .js src/",
+    "lint": "yarn prettier && ./node_modules/eslint/bin/eslint.js --fix --ext .jsx --ext .js src/",
     "precommit": "yarn lint && yarn test",
     "prettier": "prettier --single-quote --trailing-comma es5 --write 'src/**/*.{ts,js}'",
-    "start": "node src/index.ts",
-    "test": "NODE_ENV=test GW_CONFIG_DIR='test' ENVOVERRIDE='myValue' nyc mocha 'src'",
-    "tslint": "tslint -c tslint.json -t 'stylish' 'src/**/*.ts'",
-    "watch": "tsc -w"
+    "start": "node src/index.js",
+    "test": "NODE_ENV=test GW_CONFIG_DIR='test' ENVOVERRIDE='myValue' AWS_REGION='us-east-1' nyc mocha 'src'"
   }
 }
