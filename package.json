@@ -1,7 +1,7 @@
 {
-  "name": "gw-javascript-template",
+  "name": "gw-config",
   "version": "0.0.1",
-  "description": "a template for creating a javascript project ",
+  "description": "a a common configuration library for Gruntwork javascript projects",
   "main": "index.js",
   "repository": "https://github.com/gruntwork-io/gw-javascript-template",
   "author": "Gruntwork",
