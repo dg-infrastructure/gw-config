@@ -23,4 +23,13 @@ describe('config tests', () => {
       return expect(value).to.equal('testOverrideValue');
     });
   });
+
+  describe('encrypted key', () => {
+    it('gets proper value', (done) => {
+      config.getEncrypted('gruntworkConfig:encryptedKey', (err, value) => {
+        expect(value).to.equal('myEncryptedValue');
+        done();
+      });
+    });
+  });
 });

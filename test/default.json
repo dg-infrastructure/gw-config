@@ -2,6 +2,7 @@
   "gruntworkConfig": {
     "defaultOnly": "DefaultOnlyvalue",
     "envOverride": "DefaultEnvOverride",
-    "testEnvOverride": "DefaultTestEnvOverride"
+    "testEnvOverride": "DefaultTestEnvOverride",
+    "encryptedKey": "AQICAHjvy8ga1wTeCdh6kjddya4ZwEGBtJEye6ZqrCg79BM5ygF9Ynwq190xmaNSaFadsMMsAAAAbjBsBgkqhkiG9w0BBwagXzBdAgEAMFgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMnfV2861DmEk2gXZ8AgEQgCuT1l+1BqWs7k7K+jw0iGyr26HM9pnNBvoXdY2e1RJAMepgpYbiiD1mhe8p"
   }
 }

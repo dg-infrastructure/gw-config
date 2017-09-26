@@ -1,4 +1,5 @@
 /* eslint-disable no-prototype-builtins,no-param-reassign,no-restricted-syntax */
+const aws = require('aws-sdk');
 const path = require('path');
 const nconf = require('nconf');
 const glob = require('glob');
@@ -51,6 +52,21 @@ function loadConfig(config) {
   loadEnvironmentSpecificConfig(configFolder);
   loadConfigFromOtherModules();
 }
+
+nconf.Provider.prototype.getEncrypted = function (key, callback) {
+  const kms = new aws.KMS();
+
+  const params = {
+    CiphertextBlob: Buffer.from(this.get(key), 'base64'),
+  };
+
+  kms.decrypt(params, (err, data) => {
+    if (err) {
+      return callback(err, null);
+    }
+    return callback(null, data.Plaintext.toString('utf8'));
+  });
+};
 
 loadConfig();
 nconf.update = loadConfig;

@@ -46,6 +46,50 @@ let val = config.get('myApp:myKey');
 assert(val==='myValue');
 ```
 
+#### Encryption
+
+Encryption is support using [AWS' Key Management Service](https://aws.amazon.com/kms). Sensitive values can be encrypted
+via the [aws cli](https://aws.amazon.com/cli/) and the resulting encrypted values can be stored in configuration files
+in source control. When encrypted values are requested, the library uses the [AWS Node SDK](https://aws.amazon.com/sdk-for-node-js)
+to call KMS to decrypt the values to plaintext for use.
+
+##### Configuration
+
+The process running the `gw-config` library (EC2 instance, docker container, lambda) must have an IAM role assigned that
+has been given the `kms:Decrypt` permission on the KMS key that was used to encrypt the data. In addition, the `AWS_REGION`
+env variable must be set to the region where the KMS key is located.
+
+##### Encrypting Data
+
+Data can be encrypted using the `aws-cli`. Below is an example:
+
+```bash
+$ aws kms encrypt --plaintext "myEncryptedValue" --key-id "00bbfb00-00e0-0d00-0b00-f000de00b000" --query CiphertextBlob
+"AQICAHjvy8ga1wTeCdh6kjddya4ZwEGBtJEye6ZqrCg79BM5ygFjWw+7oYmxH2JsLVJx52wKAAAAbjBsBgkqhkiG9w0BBwagXzBdAgEAMFgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQM9GytrNFL/41tnfmoAgEQgCv6i6ImkB7KAj+CuHZqznrSKUXV8TBuVT69LqGBfTDNp5M8fHLb6d8EnT38"
+``` 
+##### Decrypting Data
+
+
+```json
+# default.json
+
+{
+  "myApp": {
+    "myKey": "AQICAHjvy8ga1wTeCdh6kjddya4ZwEGBtJEye6ZqrCg79BM5ygFjWw+7oYmxH2JsLVJx52wKAAAAbjBsBgkqhkiG9w0BBwagXzBdAgEAMFgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQM9GytrNFL/41tnfmoAgEQgCv6i6ImkB7KAj+CuHZqznrSKUXV8TBuVT69LqGBfTDNp5M8fHLb6d8EnT38"
+  }
+}
+```
+
+```javascript
+const config = require('gw-config');
+config.getEncrypted('myApp:myKey', (err,value)=> {
+    assert(err===null);
+    assert(value==='myEncryptedValue');    
+});
+
+
+```
+
 ## Versioning
 
 We are following the principles of [Semantic Versioning](http://semver.org/). During initial development, the major
