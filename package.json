@@ -1,9 +1,9 @@
 {
   "name": "gw-config",
   "version": "0.0.1",
-  "description": "a a common configuration library for Gruntwork javascript projects",
-  "main": "index.js",
-  "repository": "https://github.com/gruntwork-io/gw-javascript-template",
+  "description": "a common configuration library for Gruntwork javascript projects",
+  "main": "src/index.js",
+  "repository": "https://github.com/gruntwork-io/gw-config",
   "author": "Gruntwork",
   "license": "UNLICENSED",
   "private": true,
